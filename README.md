@@ -1,15 +1,20 @@
 # DeepLang
 
-DeepLang ist eine schlanke PHP-App, mit der ausgewählte Nutzer Glossare hochladen können.  
-Die Glossare dienen als unterstützende Vokabellisten für Übersetzungen per DeepL API.
+DeepLang ist eine schlanke PHP-App zur komfortablen Übersetzung von Texten über die DeepL API – mit optionalem Einsatz von Glossaren für definierte Fachbegriffe.
 
 **Features:**
-- Glossar-Upload durch berechtigte Nutzer (siehe Screenshots)
-- Benutzer-Login per Test-Zugang oder LTI (z.B. aus ILIAS)
-- Übersetzungen via DeepL API
+- Übersetzung von Texten per DeepL API (mit oder ohne Glossar)
+- Glossar-Upload & Verwaltung für berechtigte Nutzer (Editoren)
+- Benutzer-Login per Test-Account oder LTI (z.B. aus ILIAS)
+- Einfache Oberfläche (siehe Screenshots)
 
-![Screenshot: Glossar-Übersicht](Screenshot%202025-05-27%20171038.png)
-![Screenshot: Glossar-Upload](Screenshot%202025-05-27%20171126.png)
+**Screenshots:**
+
+_Hauptansicht Übersetzung:_  
+![Screenshot: Übersetzungsansicht](img/sceen01.png)
+
+_Glossarverwaltung:_  
+![Screenshot: Glossar-Übersicht](img/sceen02.png)  
 
 ---
 
@@ -44,7 +49,7 @@ Die Glossare dienen als unterstützende Vokabellisten für Übersetzungen per De
     cp .env.example .env
     ```
 2. **Parameter in `.env` setzen:**  
-   - Login per Test-User **oder** per LTI (z.B. von ILIAS)
+   - Login per Test-User **oder** per LTI (z.B. aus ILIAS)
    - DeepL API-Key hinterlegen
    - Glossar-Passwort und zugelassene Editoren eintragen
 
