@@ -74,9 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Login</button>
             </form>
+
         <?php elseif ($authenticationMethod === 'LTI'): ?>
             <p>Login nur über ILIAS möglich. Sie müssen dazu Mitglied eines ILIAS-Kurses sein, in dem DeepLang verfügbar ist.</p>
             <a href="https://ilias.uni-hohenheim.de/" class="btn btn-primary">ILIAS</a>
+        <?php elseif ($authenticationMethod === 'OIDC'): ?>
+            <form method="GET" action="auth_oidc.php">
+                <button type="submit" class="btn btn-primary mt-3">Login</button>
+            </form>
         <?php endif; ?>
     </div>
 </body>

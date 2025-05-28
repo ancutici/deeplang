@@ -3,7 +3,7 @@
         "deeplcom/deepl-php": "^1.2",
         "symfony/http-client": "^7.1",
         "nyholm/psr7": "^1.8",
-        "jumbojett/openid-connect-php": "^0.9"
+        "jumbojett/openid-connect-php": "^1.0"
     },
     "config": {
         "allow-plugins": {

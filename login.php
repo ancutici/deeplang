@@ -15,11 +15,6 @@ if (file_exists(".env")) {
 // Initialize $authenticationMethod to a default value or check if $env and $env['AUTHENTICATION'] are set
 $authenticationMethod = isset($env['AUTHENTICATION']) ? $env['AUTHENTICATION'] : null;
 
-if ($authenticationMethod === 'OIDC') {
-    require 'auth_oidc.php';
-    exit(); // Stop further script execution after OIDC attempt
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? null;
     $password = $_POST['password'] ?? null;
@@ -27,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($authenticationMethod === 'TEST') {
         require 'auth_test.php';
     }
-    // Weitere Authentifizierungsarten können hier hinzugefügt werden
 }
 
 ?>
