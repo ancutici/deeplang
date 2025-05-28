@@ -6,10 +6,10 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     exit();
 }
 
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-if (file_exists(".env")) {
-    $env = parse_ini_file('.env');
+if (file_exists(__DIR__ . '/../.env')) {
+    $env = parse_ini_file(__DIR__ . '/../.env');
 }
 
 $authenticationMethod = $env['AUTHENTICATION'];
@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? null;
 
     if ($authenticationMethod === 'TEST') {
-        require 'auth_test.php';
+        require __DIR__ . '/../src/php/auth_test.php';
     } elseif ($authenticationMethod === 'LTI' && isset($_POST['oauth_consumer_key'])) {
-        require 'auth_lti.php';
+        require __DIR__ . '/../src/php/auth_lti.php';
     }
 }
 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylesX.css">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         body, html {
             height: 100%;
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <img src="logo-deeplang.png" alt="App Logo">
+        <img src="img/logo-deeplang.png" alt="App Logo">
         <?php if ($authenticationMethod === 'TEST'): ?>
             <form method="POST" action="index.php">
                 <div class="form-floating mb-3">
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>Login nur über ILIAS möglich. Sie müssen dazu Mitglied eines ILIAS-Kurses sein, in dem DeepLang verfügbar ist.</p>
             <a href="https://ilias.uni-hohenheim.de/" class="btn btn-primary">ILIAS</a>
         <?php elseif ($authenticationMethod === 'OIDC'): ?>
-            <form method="GET" action="auth_oidc.php">
+            <form method="GET" action="../src/php/auth_oidc.php">
                 <button type="submit" class="btn btn-primary mt-3">Login</button>
             </form>
         <?php endif; ?>

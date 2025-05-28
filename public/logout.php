@@ -3,8 +3,8 @@ session_start();
 session_unset();
 session_destroy();
 
-if (file_exists(".env")) {
-    $env = parse_ini_file('.env');
+if (file_exists(__DIR__ . '/../.env')) {
+    $env = parse_ini_file(__DIR__ . '/../.env');
     $auth_method = isset($env['AUTHENTICATION']) ? $env['AUTHENTICATION'] : null;
     $oidc_logout_url = isset($env['OIDC_LOGOUT_URI']) ? $env['OIDC_LOGOUT_URI'] : 'index.php';
 } else {

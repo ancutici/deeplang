@@ -6,15 +6,15 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     exit();
 }
 
-if (file_exists(".env")) {
-    $env = parse_ini_file('.env');
+if (file_exists(__DIR__ . '/../.env')) {
+    $env = parse_ini_file(__DIR__ . '/../.env');
 }
 
 $deeplApiKey = $env['DEEPL_API_KEY'];
 
 use DeepL\Translator;
 
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $translator = new Translator($deeplApiKey);
 
@@ -42,7 +42,7 @@ try {
     <title>DeepLang - Übersetzung</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="header-container">
@@ -51,7 +51,7 @@ try {
                 <div class="col-md-4 d-flex align-items-center">
                     <!--<img src="logo-deeplang.png" alt="DeepLang Logo" class="me-2 logo-app">-->
                     <!--<img src="logo-blau.svg" alt="DeepLang Logo" class="me-2 logo-app">-->
-                    <img src="logo-deeplang.png" alt="DeepLang Logo" class="me-2 logo-app">                
+                    <img src="img/logo-deeplang.png" alt="DeepLang Logo" class="me-2 logo-app">                
                 </div>
 
                 <div>  
@@ -67,8 +67,8 @@ try {
                         <li><a class="dropdown-item" href="glossar.php">Glossare</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="nutzungsbedingungen.php">Nutzungsbedingungen</a></li>
-                        <li><a class="dropdown-item" href="datenschutz.php">Datenschutz</a></li>
+                        <li><a class="dropdown-item" href="../docs/nutzungsbedingungen.php">Nutzungsbedingungen</a></li>
+                        <li><a class="dropdown-item" href="../docs/datenschutz.php">Datenschutz</a></li>
                         <li><a class="dropdown-item" href="https://www.uni-hohenheim.de/impressum" target="_blank">Impressum</a></li>
                     </ul>
                 </div>
@@ -159,7 +159,7 @@ try {
         const glossaries = <?php echo json_encode($glossaries); ?>;
     </script>    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="translate.js"></script>
+    <script src="js/translate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 

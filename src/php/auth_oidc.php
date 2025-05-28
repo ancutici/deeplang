@@ -1,8 +1,8 @@
 <?php
-require 'vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
-if (file_exists(".env")) {
-    $env = parse_ini_file('.env');
+if (file_exists(__DIR__ . '/../../.env')) {
+    $env = parse_ini_file(__DIR__ . '/../../.env');
 }
 
 // Die wichtigsten ENV-Variablen
@@ -32,6 +32,6 @@ $username = $oidc->requestUserInfo('preferred_username') ?: $email;
 // Setze Session, leite weiter:
 $_SESSION['username'] = $username;
 $_SESSION['email'] = $email;
-header('Location: translate.php');
+header('Location: ../../public/translate.php');
 exit();
 ?>

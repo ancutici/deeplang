@@ -6,10 +6,10 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     exit();
 }
 
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-if (file_exists(".env")) {
-    $env = parse_ini_file('.env');
+if (file_exists(__DIR__ . '/../.env')) {
+    $env = parse_ini_file(__DIR__ . '/../.env');
 }
 
 // Initialize $authenticationMethod to a default value or check if $env and $env['AUTHENTICATION'] are set
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? null;
 
     if ($authenticationMethod === 'TEST') {
-        require 'auth_test.php';
+        require __DIR__ . '/../src/php/auth_test.php';
     }
 }
 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylesX.css">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         body, html {
             height: 100%;
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <img src="logo-deeplang.png" alt="App Logo">
+        <img src="img/logo-deeplang.png" alt="App Logo">
         <form method="POST" action="index.php">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" required>
