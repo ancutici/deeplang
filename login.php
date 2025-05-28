@@ -12,7 +12,13 @@ if (file_exists(".env")) {
     $env = parse_ini_file('.env');
 }
 
-$authenticationMethod = $env['AUTHENTICATION'];
+// Initialize $authenticationMethod to a default value or check if $env and $env['AUTHENTICATION'] are set
+$authenticationMethod = isset($env['AUTHENTICATION']) ? $env['AUTHENTICATION'] : null;
+
+if ($authenticationMethod === 'OIDC') {
+    require 'auth_oidc.php';
+    exit(); // Stop further script execution after OIDC attempt
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? null;

@@ -38,6 +38,7 @@ _Glossarverwaltung:_
 2. **Abhängigkeiten installieren:**
     ```bash
     composer install
+    composer require jumbojett/openid-connect-php
     ```
 
 ---
@@ -49,13 +50,13 @@ _Glossarverwaltung:_
     cp .env.example .env
     ```
 2. **Parameter in `.env` setzen:**  
-   - Login per Test-User **oder** per LTI (z.B. aus ILIAS)
+   - Login per Test-User, LTI (z.B. aus ILIAS) **oder OIDC**
    - DeepL API-Key hinterlegen
    - Glossar-Passwort und zugelassene Editoren eintragen
 
 **.env Beispiel:**
 ```ini
-; Authentication methods: LTI | TEST
+; Authentication methods: LTI | TEST | OIDC
 AUTHENTICATION="TEST"
 
 ; TEST configuration
@@ -65,6 +66,13 @@ TESTPASSWORD="langespasswort123"
 ; LTI configuration
 LTI_CONSUMER_KEY=""
 LTI_CONSUMER_SECRET=""
+
+; OIDC configuration
+; =========================
+OIDC_IDP="<your_oidc_provider_url>"
+OIDC_CLIENT_ID="<your_oidc_client_id>"
+OIDC_CLIENT_SECRET="<your_oidc_client_secret>"
+; TESTUSER="true" ; Uncomment if using a dev OIDC provider on http
 
 ; DeepL API Key
 DEEPL_API_KEY=""
