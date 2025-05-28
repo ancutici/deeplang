@@ -72,7 +72,7 @@ LTI_CONSUMER_SECRET=""
 OIDC_IDP="<your_oidc_provider_url>"
 OIDC_CLIENT_ID="<your_oidc_client_id>"
 OIDC_CLIENT_SECRET="<your_oidc_client_secret>"
-; TESTUSER="true" ; Uncomment if using a dev OIDC provider on http
+OIDC_LOGOUT_URI="<your_oidc_logout_uri>"
 
 ; DeepL API Key
 DEEPL_API_KEY=""
