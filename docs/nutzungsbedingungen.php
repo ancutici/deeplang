@@ -14,7 +14,7 @@ if (file_exists(".env")) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeepLang - Nutzungsbedingungen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="header-container">
@@ -23,7 +23,7 @@ if (file_exists(".env")) {
                 <div class="col-md-4 d-flex align-items-center">
                     <!--<img src="logo-deeplang.png" alt="DeepLang Logo" class="me-2 logo-app">-->
                     <!--<img src="logo-blau.svg" alt="DeepLang Logo" class="me-2 logo-app">-->
-                    <img src="logo-deeplang.png" alt="DeepLang Logo" class="me-2 logo-app">                
+                    <img src="img/logo-deeplang.png" alt="DeepLang Logo" class="me-2 logo-app">                
                 </div>
 
                 <div>  
@@ -35,12 +35,12 @@ if (file_exists(".env")) {
                         Navigation
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="navigationDropdown">
-                        <li><a class="dropdown-item" href="translate.php">Übersetzung</a></li>
-                        <li><a class="dropdown-item" href="glossar.php">Glossare</a></li>
-                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        <li><a class="dropdown-item" href="/translate">Übersetzung</a></li>
+                        <li><a class="dropdown-item" href="/glossar">Glossare</a></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="nutzungsbedingungen.php">Nutzungsbedingungen</a></li>
-                        <li><a class="dropdown-item" href="datenschutz.php">Datenschutz</a></li>
+                        <li><a class="dropdown-item" href="/nutzungsbedingungen">Nutzungsbedingungen</a></li>
+                        <li><a class="dropdown-item" href="/datenschutz">Datenschutz</a></li>
                         <li><a class="dropdown-item" href="https://www.uni-hohenheim.de/impressum" target="_blank">Impressum</a></li>
                     </ul>
                 </div>

@@ -45,7 +45,7 @@ $loginResult = authLTI($env['LTI_CONSUMER_KEY'], $env['LTI_CONSUMER_SECRET'], $p
 if ($loginResult['authStatus'] == 'ok') {
     session_start();
     $_SESSION['username'] = $loginResult['email'];
-    header('Location: ../../public/translate.php');
+    header('Location: /translate');
     exit();
 } else {
     echo '<p style="color:red;text-align:center;">' . $loginResult['authStatus'] . '</p>';

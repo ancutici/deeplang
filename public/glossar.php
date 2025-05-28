@@ -124,12 +124,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteGlossary'])) {
                         Navigation
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="navigationDropdown">
-                        <li><a class="dropdown-item" href="translate.php">Übersetzung</a></li>
-                        <li><a class="dropdown-item" href="glossar.php">Glossare</a></li>
-                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        <li><a class="dropdown-item" href="/translate">Übersetzung</a></li>
+                        <li><a class="dropdown-item" href="/glossar">Glossare</a></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="../docs/nutzungsbedingungen.php">Nutzungsbedingungen</a></li>
-                        <li><a class="dropdown-item" href="../docs/datenschutz.php">Datenschutz</a></li>
+                        <li><a class="dropdown-item" href="/nutzungsbedingungen">Nutzungsbedingungen</a></li>
+                        <li><a class="dropdown-item" href="/datenschutz">Datenschutz</a></li>
                         <li><a class="dropdown-item" href="https://www.uni-hohenheim.de/impressum" target="_blank">Impressum</a></li>
                     </ul>
                 </div>

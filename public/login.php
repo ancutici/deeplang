@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-    header('Location: translate.php');
+    header('Location: /translate');
     exit();
 }
 
@@ -12,8 +12,7 @@ if (file_exists(__DIR__ . '/../.env')) {
     $env = parse_ini_file(__DIR__ . '/../.env');
 }
 
-// Initialize $authenticationMethod to a default value or check if $env and $env['AUTHENTICATION'] are set
-$authenticationMethod = isset($env['AUTHENTICATION']) ? $env['AUTHENTICATION'] : null;
+$authenticationMethod = $env['AUTHENTICATION'] ?? 'TEST';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? null;
@@ -21,9 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($authenticationMethod === 'TEST') {
         require __DIR__ . '/../src/php/auth_test.php';
+    } elseif ($authenticationMethod === 'LTI' && isset($_POST['oauth_consumer_key'])) {
+        require __DIR__ . '/../src/php/auth_lti.php';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <style>
         body, html {
             height: 100%;
@@ -60,19 +60,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="login-container">
-        <img src="img/logo-deeplang.png" alt="App Logo">
-        <form method="POST" action="index.php">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" required>
-                <label for="username">Benutzername</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Passwort" required>
-                <label for="password">Passwort</label>
-            </div>
+        <img src="/img/logo-deeplang.png" alt="App Logo">
+        <?php if ($authenticationMethod === 'TEST'): ?>
+            <form method="POST" action="/login">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" required>
+                    <label for="username">Benutzername</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Passwort" required>
+                    <label for="password">Passwort</label>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Login</button>
+            </form>
 
-            <button type="submit" class="btn btn-primary mt-3">Login</button>
-        </form>
+        <?php elseif ($authenticationMethod === 'LTI'): ?>
+            <p>Login nur über ILIAS möglich. Sie müssen dazu Mitglied eines ILIAS-Kurses sein, in dem DeepLang verfügbar ist.</p>
+            <a href="https://ilias.uni-hohenheim.de/" class="btn btn-primary">ILIAS</a>
+
+        <?php elseif ($authenticationMethod === 'OIDC'): ?>
+            <form method="GET" action="/oidc">
+                <button type="submit" class="btn btn-primary mt-3">Login</button>
+            </form>
+        <?php endif; ?>
     </div>
 </body>
 </html>

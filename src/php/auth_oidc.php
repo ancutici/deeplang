@@ -32,6 +32,6 @@ $username = $oidc->requestUserInfo('preferred_username') ?: $email;
 // Setze Session, leite weiter:
 $_SESSION['username'] = $username;
 $_SESSION['email'] = $email;
-header('Location: ../../public/translate.php');
+header('Location: /translate');
 exit();
 ?>

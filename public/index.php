@@ -1,88 +1,31 @@
 <?php
-session_start();
+// public/index.php — zentrale Routing-Schaltstelle
+$requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-    header('Location: translate.php');
-    exit();
+switch ($requestPath) {
+    case '/':
+    case '/login':
+        require __DIR__ . '/login.php';
+        break;
+    case '/datenschutz':
+        require __DIR__ . '/../docs/datenschutz.php';
+        break;
+    case '/nutzungsbedingungen':
+        require __DIR__ . '/../docs/nutzungsbedingungen.php';
+        break;
+    case '/oidc':
+        require __DIR__ . '/../src/php/auth_oidc.php';
+        break;
+    case '/logout':
+        require __DIR__ . '/logout.php';
+        break;
+    case '/translate':
+        require __DIR__ . '/translate.php';
+        break;
+    case '/glossar':
+        require __DIR__ . '/glossar.php';
+        break;
+    default:
+        http_response_code(404);
+        echo 'Seite nicht gefunden';
 }
-
-require __DIR__ . '/../vendor/autoload.php';
-
-if (file_exists(__DIR__ . '/../.env')) {
-    $env = parse_ini_file(__DIR__ . '/../.env');
-}
-
-$authenticationMethod = $env['AUTHENTICATION'];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? null;
-    $password = $_POST['password'] ?? null;
-
-    if ($authenticationMethod === 'TEST') {
-        require __DIR__ . '/../src/php/auth_test.php';
-    } elseif ($authenticationMethod === 'LTI' && isset($_POST['oauth_consumer_key'])) {
-        require __DIR__ . '/../src/php/auth_lti.php';
-    }
-}
-
-?>
-
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8f9fa;
-        }
-        .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 400px;
-        }
-        .login-container img {
-            max-width: 100px;
-            margin-bottom: 50px;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <img src="img/logo-deeplang.png" alt="App Logo">
-        <?php if ($authenticationMethod === 'TEST'): ?>
-            <form method="POST" action="index.php">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Benutzername" required>
-                    <label for="username">Benutzername</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Passwort" required>
-                    <label for="password">Passwort</label>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Login</button>
-            </form>
-
-        <?php elseif ($authenticationMethod === 'LTI'): ?>
-            <p>Login nur über ILIAS möglich. Sie müssen dazu Mitglied eines ILIAS-Kurses sein, in dem DeepLang verfügbar ist.</p>
-            <a href="https://ilias.uni-hohenheim.de/" class="btn btn-primary">ILIAS</a>
-        <?php elseif ($authenticationMethod === 'OIDC'): ?>
-            <form method="GET" action="../src/php/auth_oidc.php">
-                <button type="submit" class="btn btn-primary mt-3">Login</button>
-            </form>
-        <?php endif; ?>
-    </div>
-</body>
-</html>
