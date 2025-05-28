@@ -11,10 +11,10 @@ DeepLang ist eine schlanke PHP-App zur komfortablen Übersetzung von Texten übe
 **Screenshots:**
 
 _Hauptansicht Übersetzung:_  
-![Screenshot: Übersetzungsansicht](img/sceen01.png)
+![Screenshot: Übersetzungsansicht](/img/sceen01.png)
 
 _Glossarverwaltung:_  
-![Screenshot: Glossar-Übersicht](img/sceen02.png)  
+![Screenshot: Glossar-Übersicht](/img/sceen02.png)  
 
 ---
 
